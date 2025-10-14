@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: asset-db
+  labels:
+    app: asset-db
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: asset-db
+  template:
+    metadata:
+      labels:
+        app: asset-db
+    spec:
+      containers:
+        - name: asset-db
+          image: postgres:15
+          ports:
+            - containerPort: 5432
+          envFrom:
+            - secretRef:
+                name: asset-db-secrets
+          volumeMounts:
+            - mountPath: /var/lib/postgresql/data
+              name: asset-db-data
+      volumes:
+        - name: asset-db-data
+          persistentVolumeClaim:
+            claimName: asset-db-pvc

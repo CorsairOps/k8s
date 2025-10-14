@@ -1,0 +1,23 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: topic-init
+spec:
+  template:
+    spec:
+      containers:
+        - name: topic-init
+          image: confluentinc/cp-kafka:7.7.0
+          command: ["/bin/sh", "-c"]
+          args:
+            - |
+              echo 'Waiting for Kafka to be ready...';
+              cub kafka-ready -b event-service:9092 1 30
+              echo 'Creating topics...';
+              kafka-topics --create --if-not-exists --topic asset-location-updates \
+                --partitions 3 --replication-factor 1 --bootstrap-server event-service:29092
+              echo 'Topics created.'
+          env:
+            - name: KAFKA_HEAP_OPTS
+              value: "-Xms256M -Xmx512M"
+      restartPolicy: OnFailure

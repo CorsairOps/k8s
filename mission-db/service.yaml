@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mission-db
+  labels:
+    app: mission-db
+spec:
+  selector:
+    app: mission-db
+  ports:
+    - port: 5432
+      targetPort: 5432
+  type: ClusterIP
