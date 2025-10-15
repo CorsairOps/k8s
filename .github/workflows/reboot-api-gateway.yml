@@ -1,0 +1,17 @@
+
+name: Reboot API Gateway
+
+on:
+  repository_dispatch:
+    types: [reboot-api-gateway]
+
+jobs:
+  reboot:
+    name: Reboot API Gateway Deployment
+    runs-on: self-hosted
+    if: github.repository == 'CorsairOps/k8s'
+
+    steps:
+      - name: Reboot API Gateway Deployment
+        run: |
+          kubectl rollout restart deployment api-gateway -n default
