@@ -11,6 +11,7 @@ jobs:
     steps:
       - name: Reload Deployment
         run: |
+          git pull origin main
           ./apply-secrets.sh
           for deployment in $(kubectl get deployments -n default -o custom-columns=NAME:.metadata.name --no-headers); do
             kubectl rollout restart deployment $deployment -n default
