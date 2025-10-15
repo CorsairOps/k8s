@@ -10,10 +10,11 @@ jobs:
     if: github.repository == 'CorsairOps/k8s'
 
     steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v5
+
       - name: Perform Git Pull
         run: |
-          ls
-          cd ../corsairops/k8s
           git pull origin main
 
       - name: Reload Deployment
