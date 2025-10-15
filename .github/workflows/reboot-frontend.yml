@@ -1,0 +1,17 @@
+
+name: Reboot Frontend
+
+on:
+  repository_dispatch:
+    types: [reboot-frontend]
+
+jobs:
+  reboot:
+    name: Reboot Frontend Deployment
+    runs-on: self-hosted
+    if: github.repository == 'CorsairOps/k8s'
+
+    steps:
+      - name: Reboot Frontend Deployment
+        run: |
+          kubectl rollout restart deployment frontend -n default
