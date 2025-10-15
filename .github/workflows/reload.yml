@@ -12,6 +12,7 @@ jobs:
     steps:
       - name: Perform Git Pull
         run: |
+          ls
           cd ../corsairops/k8s
           git pull origin main
 
