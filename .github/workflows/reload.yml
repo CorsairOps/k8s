@@ -12,7 +12,7 @@ jobs:
     steps:
       - name: Perform Git Pull
         run: |
-          cd /corsairops/k8s
+          cd ../corsairops/k8s
           git pull origin main
 
       - name: Reload Deployment
