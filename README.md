@@ -21,4 +21,4 @@ This directory contains Kubernetes manifests for deploying the aproduction-ready
 3. From the root of `k8s` directory run: `kubectl apply -f ./ --recursive` to apply all manifests.
 4. Monitor the deployment using `kubectl get pods -n <namespace>` and ensure all pods are running successfully.
 5. Follow steps in the `nginx-config` directory to set up NGINX as the ingress controller and obtain SSL certificates using Certbot.
-6. Access the application at corsairops.com.x
+6. Access the application at corsairops.com.
