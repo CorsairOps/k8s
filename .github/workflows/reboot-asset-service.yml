@@ -1,0 +1,17 @@
+
+name: Reboot Asset Service
+
+on:
+  repository_dispatch:
+    types: [reboot-asset-service]
+
+jobs:
+  reboot:
+    name: Reboot Asset Service Deployment
+    runs-on: self-hosted
+    if: github.repository == 'CorsairOps/k8s'
+
+    steps:
+      - name: Reboot Asset Service Deployment
+        run: |
+          kubectl rollout restart deployment asset-service -n default

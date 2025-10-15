@@ -1,0 +1,17 @@
+
+name: Reboot User Service
+
+on:
+  repository_dispatch:
+    types: [reboot-user-service]
+
+jobs:
+  reboot:
+    name: Reboot User Service Deployment
+    runs-on: self-hosted
+    if: github.repository == 'CorsairOps/k8s'
+
+    steps:
+      - name: Reboot User Service Deployment
+        run: |
+          kubectl rollout restart deployment user-service -n default

@@ -1,0 +1,17 @@
+
+name: Reboot Mission Service
+
+on:
+  repository_dispatch:
+    types: [reboot-mission-service]
+
+jobs:
+  reboot:
+    name: Reboot Mission Service Deployment
+    runs-on: self-hosted
+    if: github.repository == 'CorsairOps/k8s'
+
+    steps:
+      - name: Reboot Mission Service Deployment
+        run: |
+          kubectl rollout restart deployment mission-service -n default
