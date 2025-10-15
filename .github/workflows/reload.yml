@@ -8,7 +8,13 @@ jobs:
     name: Reload Deployment
     runs-on: self-hosted
     if: github.repository == 'CorsairOps/k8s'
+
     steps:
+      - name: Perform Git Pull
+        run: |
+          cd /corsairops/k8s
+          git pull origin main
+
       - name: Reload Deployment
         run: |
           git pull origin main
