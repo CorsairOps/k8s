@@ -1,0 +1,17 @@
+
+name: Reboot API Gateway
+
+on:
+  repository_dispatch:
+    types: [reboot-maintenance-service]
+
+jobs:
+  reboot:
+    name: Reboot Maintenance Service Deployment
+    runs-on: self-hosted
+    if: github.repository == 'CorsairOps/k8s'
+
+    steps:
+      - name: Reboot Maintenance Service Deployment
+        run: |
+          kubectl rollout restart deployment maintenance-service -n default
