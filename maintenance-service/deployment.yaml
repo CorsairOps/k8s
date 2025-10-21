@@ -1,0 +1,26 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: maintenance-service
+  labels:
+    app: maintenance-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: maintenance-service
+  template:
+    metadata:
+      labels:
+        app: maintenance-service
+    spec:
+      containers:
+        - name: maintenance-service
+          image: wadetyler/corsairops-maintenance-service:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8084
+          envFrom:
+            - secretRef:
+                name: maintenance-service-secrets

@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: maintenance-db-pv
+  labels:
+    app: maintenance-db
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: maintenance-db-storage
+  hostPath:
+    path: /data/maintenance-db
+  persistentVolumeReclaimPolicy: Retain
